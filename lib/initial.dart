@@ -8,7 +8,6 @@ class InitialSet extends StatefulWidget {
 }
 
 class InitialSetState extends State<InitialSet> {
-  final _formKey = GlobalKey<InitialSetState>();
 
   void pushChange(int containerSize, int goal) {
     var containerSize;
@@ -18,7 +17,15 @@ class InitialSetState extends State<InitialSet> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Water Tracker')),
+      appBar: AppBar(
+        title: Text('Water TrackR'),
+        backgroundColor: Colors.teal,
+      ),
+      body: Center(
+          child: Text(
+        'The form will come here soon',
+        style: TextStyle(fontSize: 25, fontStyle: FontStyle.italic),
+      )),
     );
   }
 }
