@@ -1,6 +1,7 @@
+import 'dart:convert';
 import 'dart:core';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:localstorage/localstorage.dart';
 
 class InitialSet extends StatefulWidget {
   const InitialSet({super.key});
@@ -13,8 +14,17 @@ class InitialSetState extends State<InitialSet> {
   TextEditingController goalController = new TextEditingController();
   TextEditingController containerController = new TextEditingController();
 
-  int? goal;
-  int? containerSize;
+  int goal = 0;
+  int containerSize = 0;
+
+  final LocalStorage storage = new LocalStorage('initStored.json');
+  void saveToLocal(String key1, int value1, String key2, int value2) {
+    storage.setItem(key1, value1);
+    storage.setItem(key2, value2);
+
+    // final info = jsonEncode({'name': 'Darush', 'family': 'Roshanzami'});
+    // storage.setItem('info', info);
+  }
 
   Form _initalSet() {
     final _formKey = GlobalKey<FormState>();
@@ -53,8 +63,7 @@ class InitialSetState extends State<InitialSet> {
                 validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter some text';
-                    }
-                    containerSize = int.parse(value);
+                  }
                     return null;
                 },
               ),
@@ -67,8 +76,7 @@ class InitialSetState extends State<InitialSet> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Processing Data')),
                     );
-                    goal = int.parse(goalController.text);
-                    containerSize = int.parse(containerController.text);
+                    saveToLocal('goal', goal, 'containerSize', containerSize);
                   }
                 },
                 child: const Text('Submit'),
