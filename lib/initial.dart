@@ -10,15 +10,14 @@ class InitialSet extends StatefulWidget {
 
 class InitialSetState extends State<InitialSet> {
 
-  void pushChange(int containerSize, int goal) {
-    var containerSize;
-    var goal;
-  }
+  int? goal;
+  int? containerSize;
 
   Form _initalSet() {
     final _formKey = GlobalKey<FormState>();
 
     return Form(
+      key: _formKey,
       child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -26,6 +25,13 @@ class InitialSetState extends State<InitialSet> {
             Padding(
                 padding: EdgeInsets.all(18.0),
                 child: TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter some text';
+                      }
+                      goal = int.parse(value);
+                      return null;
+                    },
                     enableInteractiveSelection: false,
                     decoration:
                         InputDecoration(labelText: "Water drinking goal"),
@@ -34,10 +40,18 @@ class InitialSetState extends State<InitialSet> {
             Padding(
                 padding: EdgeInsets.all(18.0),
                 child: TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    containerSize = int.parse(value);
+                    return null;
+                  },
                     enableInteractiveSelection: false,
                     decoration: InputDecoration(labelText: "Container size"),
                     keyboardType: TextInputType.number,
-                    textInputAction: TextInputAction.next)),
+                  textInputAction: TextInputAction.next),
+            ),
             Padding(
               padding: EdgeInsets.all(18.0),
               child: ElevatedButton(
