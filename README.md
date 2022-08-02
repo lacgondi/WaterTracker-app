@@ -1,6 +1,6 @@
 # water_tracker
 
-A new Flutter project.
+A new Flutter project that helps you track how much water you drank today.
 
 ## Getting Started
 
