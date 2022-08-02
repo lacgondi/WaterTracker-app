@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_form_builder: ^7.5.0
   shared_preferences: ^2.0.15
+  localstorage: ^4.0.0+1
 
 dev_dependencies:
   flutter_test:
