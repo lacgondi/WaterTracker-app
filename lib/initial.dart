@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
+import 'tracking.dart';
 
 class InitialSet extends StatefulWidget {
   const InitialSet({super.key});
@@ -73,10 +74,14 @@ class InitialSetState extends State<InitialSet> {
               child: ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Processing Data')),
-                    );
+                    // ScaffoldMessenger.of(context).showSnackBar(
+                    //   const SnackBar(content: Text('Processing Data')),
+                    // );
                     saveToLocal('goal', goal, 'containerSize', containerSize);
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) {
+                      return const Tracking();
+                    }));
                   }
                 },
                 child: const Text('Submit'),
