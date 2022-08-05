@@ -8,9 +8,17 @@ class Tracking extends StatefulWidget {
 }
 
 class TrackingState extends State<Tracking> {
-
-
   bool isPressed = false;
+
+  IconButton _buildIconButton() {
+    return IconButton(
+        icon: (isPressed)
+            ? Icon(Icons.water_drop)
+            : Icon(Icons.water_drop_outlined),
+        color: Colors.blueAccent[200],
+        iconSize: 55.0,
+        onPressed: () => onTap());
+  }
 
   Row _buildRow(int g, int c) {
     List<IconData> bottles = <IconData>[];
@@ -21,12 +29,7 @@ class TrackingState extends State<Tracking> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          for (var item in bottles)
-            IconButton(
-                icon: (isPressed) ? Icon(item) : Icon(Icons.water_drop),
-                color: Colors.blueAccent[200],
-                iconSize: 55.0,
-                onPressed: () => onTap()),
+          _buildIconButton()
         ]);
   }
 
