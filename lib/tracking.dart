@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'initial.dart';
 
+//Global variables
+int counter = 0;
+
 class Tracking extends StatefulWidget {
   const Tracking({super.key});
 
@@ -8,34 +11,30 @@ class Tracking extends StatefulWidget {
 }
 
 class TrackingState extends State<Tracking> {
-  bool isPressed = false;
+  Widget _statusUpdater() {
+    return Text("Hello you've drank $counter ml out of $goal ml today.");
+  }
 
-  IconButton _buildIconButton() {
+  Widget _buildIconButton() {
     return IconButton(
-        icon: (isPressed)
-            ? Icon(Icons.water_drop)
-            : Icon(Icons.water_drop_outlined),
-        color: Colors.blueAccent[200],
+        icon: Icon(Icons.water_drop_outlined),
+        color: Color.fromARGB(255, 68, 171, 255),
         iconSize: 55.0,
         onPressed: () => onTap());
   }
 
-  Row _buildRow(int g, int c) {
-    List<IconData> bottles = <IconData>[];
-    for (var i = 0; i < g ~/ c; i++) {
-      bottles.add(Icons.water_drop_outlined);
-    }
-    return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          _buildIconButton()
-        ]);
+  Widget _buildColumn(int g, int c) {
+    return Column(
+      children: <Widget>[
+        Align(alignment: Alignment.topCenter, child: _statusUpdater()),
+        Align(alignment: Alignment.center, child: _buildIconButton()),
+      ],
+    );
   }
 
   void onTap() {
     setState(() {
-      isPressed = !isPressed;
+      counter += containerSize;
     });
   }
 
@@ -44,7 +43,7 @@ class TrackingState extends State<Tracking> {
       appBar: AppBar(
         title: Text('Tracking'),
       ),
-      body: _buildRow(goal, containerSize),
+      body: _buildColumn(goal, containerSize),
     );
   }
 }
