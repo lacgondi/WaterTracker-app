@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
 import 'tracking.dart';
 
+//global variables
+int goal = 0;
+int containerSize = 0;
+
 class InitialSet extends StatefulWidget {
   const InitialSet({super.key});
 
@@ -15,8 +19,7 @@ class InitialSetState extends State<InitialSet> {
   TextEditingController goalController = new TextEditingController();
   TextEditingController containerController = new TextEditingController();
 
-  int goal = 0;
-  int containerSize = 0;
+  
 
   final LocalStorage storage = new LocalStorage('initStored.json');
   void saveToLocal(String key1, int value1, String key2, int value2) {
