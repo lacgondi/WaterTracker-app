@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
 import 'tracking.dart';
 
-//global variables
 int goal = 0;
 int containerSize = 0;
 
@@ -25,7 +24,8 @@ class InitialSetState extends State<InitialSet> {
   void saveToLocal(String key1, int value1, String key2, int value2) {
     storage.setItem(key1, value1);
     storage.setItem(key2, value2);
-
+    goal = value1;
+    containerSize = value2;
     // final info = jsonEncode({'name': 'Darush', 'family': 'Roshanzami'});
     // storage.setItem('info', info);
   }
@@ -80,7 +80,8 @@ class InitialSetState extends State<InitialSet> {
                     // ScaffoldMessenger.of(context).showSnackBar(
                     //   const SnackBar(content: Text('Processing Data')),
                     // );
-                    saveToLocal('goal', goal, 'containerSize', containerSize);
+                    saveToLocal('goal', int.parse(goalController.text),
+                        'containerSize', int.parse(containerController.text));
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) {
                       return const Tracking();
