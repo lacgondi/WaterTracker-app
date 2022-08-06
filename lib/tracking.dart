@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'initial.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,12 +25,20 @@ class TrackingState extends State<Tracking> {
         onPressed: () => _onTap());
   }
 
+  Widget _buildReset() {
+    return OutlinedButton(
+      onPressed: () => _reset(),
+      child: Text('Reset counter'),
+    );
+  }
+
   Widget _buildColumn(int g, int c) {
     loadCounter();
     return Column(
       children: <Widget>[
         Align(alignment: Alignment.topCenter, child: _statusUpdater()),
         Align(alignment: Alignment.center, child: _buildIconButton()),
+        Align(alignment: Alignment.bottomCenter, child: _buildReset())
       ],
     );
   }
@@ -51,6 +60,14 @@ class TrackingState extends State<Tracking> {
     SharedPreferences storage = await SharedPreferences.getInstance();
     setState(() {
       _counter = (storage.getInt('counter') ?? 0) + containerSize;
+      storage.setInt('counter', _counter);
+    });
+  }
+
+  void _reset() async {
+    SharedPreferences storage = await SharedPreferences.getInstance();
+    setState(() {
+      _counter = 0;
       storage.setInt('counter', _counter);
     });
   }
