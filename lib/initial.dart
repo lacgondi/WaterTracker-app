@@ -91,9 +91,6 @@ class InitialSetState extends State<InitialSet> {
               child: ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    // ScaffoldMessenger.of(context).showSnackBar(
-                    //   const SnackBar(content: Text('Processing Data')),
-                    // );
                     saveToLocal(int.parse(goalController.text),
                         int.parse(containerController.text));
                     Navigator.pushReplacement(context,
