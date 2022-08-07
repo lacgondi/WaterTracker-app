@@ -1,9 +1,9 @@
-import 'dart:convert';
 import 'dart:core';
 import 'package:flutter/material.dart';
-import 'package:localstorage/localstorage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'tracking.dart';
 
+//Global variables
 int goal = 0;
 int containerSize = 0;
 
@@ -18,16 +18,28 @@ class InitialSetState extends State<InitialSet> {
   TextEditingController goalController = new TextEditingController();
   TextEditingController containerController = new TextEditingController();
 
-  
+  void loadCounter() async {
+    SharedPreferences storage = await SharedPreferences.getInstance();
+    setState(() {
+      goal = storage.getInt('goal') ?? 0;
+      containerSize = storage.getInt('containerSize') ?? 0;
+    });
+  }
 
-  final LocalStorage storage = new LocalStorage('initStored.json');
-  void saveToLocal(String key1, int value1, String key2, int value2) {
-    storage.setItem(key1, value1);
-    storage.setItem(key2, value2);
-    goal = value1;
-    containerSize = value2;
-    // final info = jsonEncode({'name': 'Darush', 'family': 'Roshanzami'});
-    // storage.setItem('info', info);
+  @override
+  void initState() {
+    super.initState();
+    loadCounter();
+  }
+
+  void saveToLocal(int value1, int value2) async {
+    SharedPreferences storage = await SharedPreferences.getInstance();
+    setState(() {
+      goal = value1;
+      storage.setInt('goal', goal);
+      containerSize = value2;
+      storage.setInt('containerSize', containerSize);
+    });
   }
 
   Form _initalSet() {
@@ -77,11 +89,8 @@ class InitialSetState extends State<InitialSet> {
               child: ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    // ScaffoldMessenger.of(context).showSnackBar(
-                    //   const SnackBar(content: Text('Processing Data')),
-                    // );
-                    saveToLocal('goal', int.parse(goalController.text),
-                        'containerSize', int.parse(containerController.text));
+                    saveToLocal(int.parse(goalController.text),
+                        int.parse(containerController.text));
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) {
                       return const Tracking();
