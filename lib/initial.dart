@@ -16,6 +16,7 @@ class InitialSet extends StatefulWidget {
 }
 
 class InitialSetState extends State<InitialSet> {
+  //Variables
   TextEditingController goalController = new TextEditingController();
   TextEditingController containerController = new TextEditingController();
 
