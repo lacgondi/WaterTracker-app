@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:water_tracker/tracking.dart';
 import 'initial.dart';
 
 void main() {
@@ -11,7 +12,12 @@ class WaterTracker extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: const InitialSet()
+    return MaterialApp(
+      initialRoute: InitialSet.id,
+      routes: {
+        InitialSet.id: (context) => const InitialSet(),
+        Tracking.id: (context) => const Tracking(),
+      },
     );
 }
 

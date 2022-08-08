@@ -8,6 +8,7 @@ int _counter = 0;
 
 class Tracking extends StatefulWidget {
   const Tracking({super.key});
+  static const String id = "/trackingPage";
 
   State<Tracking> createState() => TrackingState();
 }

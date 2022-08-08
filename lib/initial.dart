@@ -9,12 +9,14 @@ int containerSize = 0;
 
 class InitialSet extends StatefulWidget {
   const InitialSet({super.key});
+  static const String id = "/initialSet";
 
   @override
   State<InitialSet> createState() => InitialSetState();
 }
 
 class InitialSetState extends State<InitialSet> {
+  //Variables
   TextEditingController goalController = new TextEditingController();
   TextEditingController containerController = new TextEditingController();
 
