@@ -15,7 +15,7 @@ class WaterTracker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: InitialSet.id,
+      initialRoute: Splash.id,
       routes: {
         Splash.id: (context) => const Splash(),
         InitialSet.id: (context) => const InitialSet(),
