@@ -9,10 +9,15 @@ class Settings extends StatefulWidget {
   State<Settings> createState() => SettingsSetState();
 }
 
+Widget _buildBody() {
+  return Text('soon');
+}
+
 class SettingsSetState extends State<Settings> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Settings")),
+      body: _buildBody(),
     );
   }
 }
