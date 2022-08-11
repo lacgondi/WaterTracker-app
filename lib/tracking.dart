@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:water_tracker/settings.dart';
 import 'initial.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,6 +15,12 @@ class Tracking extends StatefulWidget {
 }
 
 class TrackingState extends State<Tracking> {
+  Widget _buildSettingsButton() {
+    return IconButton(
+        onPressed: () => Navigator.pushNamed(context, Settings.id),
+        icon: Icon(Icons.settings));
+  }
+
   Widget _statusUpdater() {
     return Text("Hello you've drank $_counter ml out of $goal ml today.");
   }
@@ -77,6 +84,7 @@ class TrackingState extends State<Tracking> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Tracking'),
+        leading: _buildSettingsButton(),
       ),
       body: _buildColumn(goal, containerSize),
     );
