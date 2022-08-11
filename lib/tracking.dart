@@ -84,7 +84,7 @@ class TrackingState extends State<Tracking> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Tracking'),
-        leading: _buildSettingsButton(),
+        actions: <Widget>[_buildSettingsButton()],
       ),
       body: _buildColumn(goal, containerSize),
     );
