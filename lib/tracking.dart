@@ -1,10 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:water_tracker/settings.dart';
 import 'initial.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 //Global variables
 int _counter = 0;
+int _goalTracked = 0;
+int _containerTracked = 0;
 
 class Tracking extends StatefulWidget {
   const Tracking({super.key});
@@ -14,8 +17,15 @@ class Tracking extends StatefulWidget {
 }
 
 class TrackingState extends State<Tracking> {
+  Widget _buildSettingsButton() {
+    return IconButton(
+        onPressed: () => Navigator.pushNamed(context, Settings.id),
+        icon: Icon(Icons.settings));
+  }
+
   Widget _statusUpdater() {
-    return Text("Hello you've drank $_counter ml out of $goal ml today.");
+    return Text(
+        "Hello you've drank $_counter ml out of $_goalTracked ml today.");
   }
 
   Widget _buildIconButton() {
@@ -48,6 +58,8 @@ class TrackingState extends State<Tracking> {
     SharedPreferences storage = await SharedPreferences.getInstance();
     setState(() {
       _counter = storage.getInt('counter') ?? 0;
+      _goalTracked = storage.getInt('goal') ?? 0;
+      _containerTracked = storage.getInt('containerSize') ?? 0;
     });
   }
 
@@ -60,7 +72,7 @@ class TrackingState extends State<Tracking> {
   void _onTap() async {
     SharedPreferences storage = await SharedPreferences.getInstance();
     setState(() {
-      _counter = (storage.getInt('counter') ?? 0) + containerSize;
+      _counter = (storage.getInt('counter') ?? 0) + _containerTracked;
       storage.setInt('counter', _counter);
     });
   }
@@ -77,8 +89,9 @@ class TrackingState extends State<Tracking> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Tracking'),
+        actions: <Widget>[_buildSettingsButton()],
       ),
-      body: _buildColumn(goal, containerSize),
+      body: _buildColumn(_goalTracked, _containerTracked),
     );
   }
 }
