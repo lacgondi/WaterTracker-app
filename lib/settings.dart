@@ -45,7 +45,7 @@ class SettingsSetState extends State<Settings> {
       }
       if (containerSettingC.text == null || containerSettingC.text == '') {
       } else {
-        containerSetting = int.parse(goalSettingC.text);
+        containerSetting = int.parse(containerSettingC.text);
         storage.setInt('containerSize', containerSetting);
       }
     });
