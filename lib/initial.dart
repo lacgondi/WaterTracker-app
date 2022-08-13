@@ -4,8 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'tracking.dart';
 
 //Global variables
-int goal = 0;
-int containerSize = 0;
+int _goal = 0;
+int _containerSize = 0;
 
 class InitialSet extends StatefulWidget {
   const InitialSet({super.key});
@@ -23,8 +23,8 @@ class InitialSetState extends State<InitialSet> {
   void loadCounter() async {
     SharedPreferences storage = await SharedPreferences.getInstance();
     setState(() {
-      goal = storage.getInt('goal') ?? 0;
-      containerSize = storage.getInt('containerSize') ?? 0;
+      _goal = storage.getInt('goal') ?? 0;
+      _containerSize = storage.getInt('containerSize') ?? 0;
     });
   }
 
@@ -37,10 +37,10 @@ class InitialSetState extends State<InitialSet> {
   void saveToLocal(int value1, int value2) async {
     SharedPreferences storage = await SharedPreferences.getInstance();
     setState(() {
-      goal = value1;
-      storage.setInt('goal', goal);
-      containerSize = value2;
-      storage.setInt('containerSize', containerSize);
+      _goal = value1;
+      storage.setInt('goal', _goal);
+      _containerSize = value2;
+      storage.setInt('containerSize', _containerSize);
     });
   }
 
