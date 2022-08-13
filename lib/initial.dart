@@ -93,10 +93,7 @@ class InitialSetState extends State<InitialSet> {
                   if (_formKey.currentState!.validate()) {
                     saveToLocal(int.parse(goalController.text),
                         int.parse(containerController.text));
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) {
-                      return const Tracking();
-                    }));
+                    Navigator.pushReplacementNamed(context, Tracking.id);
                   }
                 },
                 child: const Text('Submit'),
