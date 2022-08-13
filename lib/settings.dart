@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:core';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:water_tracker/tracking.dart';
 
 
@@ -17,8 +17,41 @@ class Settings extends StatefulWidget {
 class SettingsSetState extends State<Settings> {
   TextEditingController goalSettingC = TextEditingController();
   TextEditingController containerSettingC = TextEditingController();
-  
-Widget _buildBody() {
+
+  int goalSetting = 0;
+  int containerSetting = 0;
+
+  void loadSettings() async {
+    SharedPreferences storage = await SharedPreferences.getInstance();
+    setState(() {
+      goalSetting = storage.getInt('goal') ?? 0;
+      containerSetting = storage.getInt('containerSize') ?? 0;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadSettings();
+  }
+
+  void saveSettings() async {
+    SharedPreferences storage = await SharedPreferences.getInstance();
+    setState(() {
+      if (goalSettingC.text == null || goalSettingC.text == '') {
+      } else {
+        goalSetting = int.parse(goalSettingC.text);
+        storage.setInt('goal', goalSetting);
+      }
+      if (containerSettingC.text == null || containerSettingC.text == '') {
+      } else {
+        containerSetting = int.parse(goalSettingC.text);
+        storage.setInt('containerSize', containerSetting);
+      }
+    });
+  }
+
+  Widget _buildBody() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -46,6 +79,7 @@ Widget _buildBody() {
           padding: EdgeInsets.all(18.0),
           child: ElevatedButton(
             onPressed: () {
+              saveSettings();
               Navigator.pushReplacementNamed(context, Tracking.id);
             },
             child: const Text('Submit'),
@@ -53,7 +87,7 @@ Widget _buildBody() {
         ),
       ],
     );
-}
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Settings")),
