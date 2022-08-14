@@ -58,7 +58,8 @@ class InitialSetState extends State<InitialSet> {
                 child: TextFormField(
                 controller: goalController,
                 enableInteractiveSelection: false,
-                decoration: InputDecoration(labelText: "Water drinking goal"),
+                decoration: InputDecoration(
+                    labelText: "Water drinking goal", suffixText: 'ml'),
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
                 validator: (value) {
@@ -75,7 +76,8 @@ class InitialSetState extends State<InitialSet> {
                 child: TextFormField(
                 controller: containerController,
                 enableInteractiveSelection: false,
-                decoration: InputDecoration(labelText: "Container size"),
+                decoration: InputDecoration(
+                    labelText: 'Container size', suffixText: 'ml'),
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
                 validator: (value) {
