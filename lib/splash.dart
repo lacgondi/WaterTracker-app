@@ -21,7 +21,7 @@ class SplashState extends State<Splash> {
       Navigator.pushReplacementNamed(context, Tracking.id);
     } else {
       await prefs.setBool('seen', true);
-      Navigator.pushNamed(context, InitialSet.id);
+      Navigator.pushReplacementNamed(context, InitialSet.id);
     }
   }
 
