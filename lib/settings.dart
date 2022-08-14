@@ -62,7 +62,10 @@ class SettingsSetState extends State<Settings> {
               controller: _goalsettingC,
               enableInteractiveSelection: false,
               decoration:
-                  InputDecoration(labelText: "Change water intake goal"),
+                  InputDecoration(
+                  labelText: "Change water intake goal",
+                  hintText: '$_goalsetting',
+                  suffixText: 'ml'),
               keyboardType: TextInputType.number,
               textInputAction: TextInputAction.next,
             )),
@@ -71,7 +74,10 @@ class SettingsSetState extends State<Settings> {
             child: TextField(
               controller: _containerSettingC,
               enableInteractiveSelection: false,
-              decoration: InputDecoration(labelText: "Change container size"),
+              decoration: InputDecoration(
+                  labelText: "Change container size",
+                  hintText: '$_containerSetting',
+                  suffixText: 'ml'),
               keyboardType: TextInputType.number,
               textInputAction: TextInputAction.next,
             )),
