@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'tracking.dart';
 
-//Global variables
-int _goal = 0;
-int _containerSize = 0;
 
 class InitialSet extends StatefulWidget {
   const InitialSet({super.key});
@@ -20,6 +17,9 @@ class InitialSetState extends State<InitialSet> {
   TextEditingController goalController = new TextEditingController();
   TextEditingController containerController = new TextEditingController();
 
+  int _goal = 0;
+  int _containerSize = 0;
+  
   void loadCounter() async {
     SharedPreferences storage = await SharedPreferences.getInstance();
     setState(() {
@@ -59,7 +59,21 @@ class InitialSetState extends State<InitialSet> {
                 controller: goalController,
                 enableInteractiveSelection: false,
                 decoration: InputDecoration(
-                    labelText: "Water drinking goal \*", suffixText: 'ml'),
+                    // label: RichText(
+                    //     text: TextSpan(
+                    //         text: 'Water drinking goal',
+                    //         style: TextStyle(
+                    //           color: Colors.grey[700],
+                    //         ),
+                    //         children: const [
+                    //       TextSpan(
+                    //           text: ' *',
+                    //           style: TextStyle(
+                    //             color: Colors.red,
+                    //           ))
+                    //     ])),
+                    labelText: "Water drinking goal \*",
+                    suffixText: 'ml'),
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
                 validator: (value) {
@@ -77,6 +91,19 @@ class InitialSetState extends State<InitialSet> {
                 controller: containerController,
                 enableInteractiveSelection: false,
                 decoration: InputDecoration(
+                    // label: RichText(
+                    //     text: TextSpan(
+                    //         text: 'Water bottle size',
+                    //         style: TextStyle(
+                    //           color: Colors.grey[700],
+                    //         ),
+                    //         children: const [
+                    //       TextSpan(
+                    //           text: ' *',
+                    //           style: TextStyle(
+                    //             color: Colors.red,
+                    //           ))
+                    //     ])),
                     labelText: "Water bottle size \*", suffixText: 'ml'),
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
