@@ -15,17 +15,17 @@ class Settings extends StatefulWidget {
 
 
 class SettingsSetState extends State<Settings> {
-  TextEditingController goalSettingC = TextEditingController();
-  TextEditingController containerSettingC = TextEditingController();
+  TextEditingController _goalsettingC = TextEditingController();
+  TextEditingController _containerSettingC = TextEditingController();
 
-  int goalSetting = 0;
-  int containerSetting = 0;
+  int _goalsetting = 0;
+  int _containerSetting = 0;
 
   void loadSettings() async {
     SharedPreferences storage = await SharedPreferences.getInstance();
     setState(() {
-      goalSetting = storage.getInt('goal') ?? 0;
-      containerSetting = storage.getInt('containerSize') ?? 0;
+      _goalsetting = storage.getInt('goal') ?? 0;
+      _containerSetting = storage.getInt('containerSize') ?? 0;
     });
   }
 
@@ -38,15 +38,15 @@ class SettingsSetState extends State<Settings> {
   void saveSettings() async {
     SharedPreferences storage = await SharedPreferences.getInstance();
     setState(() {
-      if (goalSettingC.text == null || goalSettingC.text == '') {
+      if (_goalsettingC.text == null || _goalsettingC.text == '') {
       } else {
-        goalSetting = int.parse(goalSettingC.text);
-        storage.setInt('goal', goalSetting);
+        _goalsetting = int.parse(_goalsettingC.text);
+        storage.setInt('goal', _goalsetting);
       }
-      if (containerSettingC.text == null || containerSettingC.text == '') {
+      if (_containerSettingC.text == null || _containerSettingC.text == '') {
       } else {
-        containerSetting = int.parse(containerSettingC.text);
-        storage.setInt('containerSize', containerSetting);
+        _containerSetting = int.parse(_containerSettingC.text);
+        storage.setInt('containerSize', _containerSetting);
       }
     });
   }
@@ -59,7 +59,7 @@ class SettingsSetState extends State<Settings> {
         Padding(
             padding: EdgeInsets.only(left: 18.0, right: 18.0),
             child: TextField(
-              controller: goalSettingC,
+              controller: _goalsettingC,
               enableInteractiveSelection: false,
               decoration:
                   InputDecoration(labelText: "Change water intake goal"),
@@ -69,7 +69,7 @@ class SettingsSetState extends State<Settings> {
         Padding(
             padding: EdgeInsets.only(left: 18.0, right: 18.0),
             child: TextField(
-              controller: containerSettingC,
+              controller: _containerSettingC,
               enableInteractiveSelection: false,
               decoration: InputDecoration(labelText: "Change container size"),
               keyboardType: TextInputType.number,
