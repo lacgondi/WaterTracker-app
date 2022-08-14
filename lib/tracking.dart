@@ -63,6 +63,8 @@ class TrackingState extends State<Tracking> {
     });
   }
 
+  //todo check time and date on open
+
   @override
   void initState() {
     super.initState();
@@ -70,6 +72,7 @@ class TrackingState extends State<Tracking> {
   }
 
   void _onTap() async {
+    //todo store time and date added
     SharedPreferences storage = await SharedPreferences.getInstance();
     setState(() {
       _counter = (storage.getInt('counter') ?? 0) + _containerTracked;
