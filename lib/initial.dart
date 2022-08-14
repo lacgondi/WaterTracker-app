@@ -59,12 +59,12 @@ class InitialSetState extends State<InitialSet> {
                 controller: goalController,
                 enableInteractiveSelection: false,
                 decoration: InputDecoration(
-                    labelText: "Water drinking goal", suffixText: 'ml'),
+                    labelText: "Water drinking goal \*", suffixText: 'ml'),
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
                 validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
+                    return 'Please enter your water intake goal';
                   }
                       return null;
                 },
@@ -77,12 +77,12 @@ class InitialSetState extends State<InitialSet> {
                 controller: containerController,
                 enableInteractiveSelection: false,
                 decoration: InputDecoration(
-                    labelText: 'Container size', suffixText: 'ml'),
+                    labelText: "Water bottle size \*", suffixText: 'ml'),
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
                 validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
+                    return 'Please enter the capacity of your water bottle';
                   }
                     return null;
                 },
