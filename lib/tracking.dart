@@ -29,10 +29,12 @@ class TrackingState extends State<Tracking> {
   }
 
   Widget _buildIconButton() {
+
+    //todo label under
     return IconButton(
         icon: Icon(Icons.water_drop_outlined),
         color: Color.fromARGB(255, 68, 171, 255),
-        iconSize: 55.0,
+        iconSize: 80,
         onPressed: () => _onTap());
   }
 
@@ -44,14 +46,27 @@ class TrackingState extends State<Tracking> {
   }
 
   Widget _buildColumn(int g, int c) {
-    loadCounter();
-    return Column(
-      children: <Widget>[
-        Align(alignment: Alignment.topCenter, child: _statusUpdater()),
-        Align(alignment: Alignment.center, child: _buildIconButton()),
+    return Container(
+        padding: const EdgeInsets.all(18),
+        child: Column(
+          children: [
+            Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _statusUpdater(),
+                ]),
+            Expanded(
+                child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                _buildIconButton(),
+              ],
+            )),
         Align(alignment: Alignment.bottomCenter, child: _buildReset())
       ],
-    );
+        ));
   }
 
   void loadCounter() async {
