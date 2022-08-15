@@ -51,14 +51,13 @@ class SettingsSetState extends State<Settings> {
     });
   }
 
-  Widget _buildBody() {
+  Widget _buildTextFields() {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        Padding(
-            padding: EdgeInsets.only(left: 18.0, right: 18.0),
-            child: TextField(
+      children: [
+        Row(
+          children: [
+            Flexible(
+              child: TextField(
               controller: _goalsettingC,
               enableInteractiveSelection: false,
               decoration:
@@ -66,37 +65,69 @@ class SettingsSetState extends State<Settings> {
                   labelText: "Change water intake goal",
                   hintText: '$_goalsetting',
                   suffixText: 'ml'),
+                style: TextStyle(height: 2.5),
               keyboardType: TextInputType.number,
               textInputAction: TextInputAction.next,
-            )),
-        Padding(
-            padding: EdgeInsets.only(left: 18.0, right: 18.0),
-            child: TextField(
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Row(
+          children: [
+            Flexible(
+              child: TextField(
               controller: _containerSettingC,
               enableInteractiveSelection: false,
               decoration: InputDecoration(
                   labelText: "Change container size",
                   hintText: '$_containerSetting',
                   suffixText: 'ml'),
+                style: TextStyle(height: 2.5),
               keyboardType: TextInputType.number,
               textInputAction: TextInputAction.next,
-            )),
-        Padding(
-          padding: EdgeInsets.all(18.0),
-          child: ElevatedButton(
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 20,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildBody() {
+    return Container(
+        padding: const EdgeInsets.all(32),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            _buildTextFields(),
+            Row(children: [
+              ElevatedButton(
             onPressed: () {
               saveSettings();
               Navigator.pushReplacementNamed(context, Tracking.id);
             },
             child: const Text('Submit'),
           ),
-        ),
+            ])
+        
       ],
-    );
+        ));
   }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Settings")),
+      appBar: AppBar(
+        backgroundColor: Colors.cyan[200],
+        title: const Text("Settings"),
+      ),
       body: _buildBody(),
     );
   }
