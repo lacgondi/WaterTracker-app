@@ -24,49 +24,68 @@ class TrackingState extends State<Tracking> {
   }
 
   Widget _statusUpdater() {
-    return Text(
-        "Hello you've drank $_counter ml out of $_goalTracked ml today.");
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        RichText(
+            text: TextSpan(
+                text: 'Hello,',
+                style: Theme.of(context).textTheme.headline1,
+                children: <TextSpan>[
+                  TextSpan(
+                    text: "\nyou've drank",
+                    style: Theme.of(context).textTheme.headline4,
+                  ),
+                  TextSpan(
+                      text: "\n$_counter ml out of $_goalTracked ml today.",
+                      style: Theme.of(context).textTheme.headlineSmall)
+                ]),
+            textAlign: TextAlign.center),
+        // Text("Hello you've drank $_counter ml out of $_goalTracked ml today."),
+      ],
+    );
   }
 
   Widget _buildIconButton() {
-
     //todo label under
-    return IconButton(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        IconButton(
         icon: Icon(Icons.water_drop_outlined),
         color: Color.fromARGB(255, 68, 171, 255),
-        iconSize: 80,
-        onPressed: () => _onTap());
+            iconSize: 100,
+            onPressed: () => _onTap())
+      ],
+    );
   }
 
   Widget _buildReset() {
-    return OutlinedButton(
-      onPressed: () => _reset(),
-      child: Text('Reset counter'),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        OutlinedButton(
+          onPressed: () => _reset(),
+          child: const Text('Reset counter'),
+        ),
+      ],
     );
   }
 
   Widget _buildColumn(int g, int c) {
     return Container(
-        padding: const EdgeInsets.all(18),
-        child: Column(
-          children: [
-            Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _statusUpdater(),
-                ]),
-            Expanded(
-                child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                _buildIconButton(),
-              ],
-            )),
-        Align(alignment: Alignment.bottomCenter, child: _buildReset())
-      ],
-        ));
+      padding: const EdgeInsets.all(18),
+      child: Column(
+        children: [
+          _statusUpdater(),
+          Expanded(
+            child: _buildIconButton(),
+          ),
+          _buildReset(),
+        ],
+      ),
+    );
   }
 
   void loadCounter() async {
