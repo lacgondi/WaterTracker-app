@@ -76,6 +76,10 @@ class TrackingState extends State<Tracking> {
       padding: const EdgeInsets.all(18),
       child: Column(
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[_buildSettingsButton()],
+          ),
           _statusUpdater(),
           Expanded(
             child: _buildIconButton(),
