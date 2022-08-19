@@ -1,7 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:water_tracker/settings.dart';
-import 'initial.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 //Global variables
@@ -82,7 +80,6 @@ class TrackingState extends State<Tracking> {
           Expanded(
             child: _buildIconButton(),
           ),
-          _buildReset(),
         ],
       ),
     );
@@ -98,15 +95,31 @@ class TrackingState extends State<Tracking> {
   }
 
   //todo check time and date on open
+  // void loadDate() async {
+  //   SharedPreferences storage = await SharedPreferences.getInstance();
+  //   setState(() {
+  //     storage.getInt('day') ?? DateTime.now().day;
+  //   });
+  // }
+
+  // void checkDate() async {
+  //   SharedPreferences storage = await SharedPreferences.getInstance();
+  //   if (storage.getInt('day') != DateTime.now().day) {
+  //     setState(() {
+  //       storage.setInt('day', DateTime.now().day);
+  //       _reset();
+  //     });
+  //   } else {}
+  // }
 
   @override
   void initState() {
     super.initState();
     loadCounter();
+    // loadDate();
   }
 
   void _onTap() async {
-    //todo store time and date added
     SharedPreferences storage = await SharedPreferences.getInstance();
     setState(() {
       _counter = (storage.getInt('counter') ?? 0) + _containerTracked;
@@ -122,12 +135,9 @@ class TrackingState extends State<Tracking> {
     });
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Tracking'),
-        actions: <Widget>[_buildSettingsButton()],
-      ),
       body: _buildColumn(_goalTracked, _containerTracked),
     );
   }
