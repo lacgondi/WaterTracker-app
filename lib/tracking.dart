@@ -109,28 +109,11 @@ class TrackingState extends State<Tracking> {
   }
 
   //todo check time and date on open
-  // void loadDate() async {
-  //   SharedPreferences storage = await SharedPreferences.getInstance();
-  //   setState(() {
-  //     storage.getInt('day') ?? DateTime.now().day;
-  //   });
-  // }
-
-  // void checkDate() async {
-  //   SharedPreferences storage = await SharedPreferences.getInstance();
-  //   if (storage.getInt('day') != DateTime.now().day) {
-  //     setState(() {
-  //       storage.setInt('day', DateTime.now().day);
-  //       _reset();
-  //     });
-  //   } else {}
-  // }
 
   @override
   void initState() {
     super.initState();
     loadCounter();
-    // loadDate();
   }
 
   void _onTap() async {
