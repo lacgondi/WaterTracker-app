@@ -33,7 +33,7 @@ class TrackingState extends State<Tracking> {
                 children: <TextSpan>[
                   TextSpan(
                     text: "\nyou've drank",
-                    style: Theme.of(context).textTheme.headline4,
+                    style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   TextSpan(
                       text: "\n$_counter ml out of $_goalTracked ml today.",
@@ -51,10 +51,11 @@ class TrackingState extends State<Tracking> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         IconButton(
+            padding: EdgeInsets.fromLTRB(0, 225, 0, 10),
         icon: Icon(Icons.water_drop_outlined),
         color: Color.fromARGB(255, 68, 171, 255),
             iconSize: 100,
-            onPressed: () => _onTap())
+            onPressed: () => _onTap()),
       ],
     );
   }
@@ -81,9 +82,18 @@ class TrackingState extends State<Tracking> {
             children: <Widget>[_buildSettingsButton()],
           ),
           _statusUpdater(),
-          Expanded(
-            child: _buildIconButton(),
-          ),
+          _buildIconButton(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              RichText(
+                text: TextSpan(
+                    text: 'press if have drank $_containerTracked ml',
+                    style: Theme.of(context).textTheme.labelSmall),
+              ),
+            ],
+          )
+          
         ],
       ),
     );
