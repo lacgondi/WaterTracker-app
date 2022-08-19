@@ -50,6 +50,7 @@ class InitialSetState extends State<InitialSet> {
     return Form(
       key: _formKey,
       child: Column(
+
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
@@ -59,19 +60,6 @@ class InitialSetState extends State<InitialSet> {
                 controller: goalController,
                 enableInteractiveSelection: false,
                 decoration: InputDecoration(
-                    // label: RichText(
-                    //     text: TextSpan(
-                    //         text: 'Water drinking goal',
-                    //         style: TextStyle(
-                    //           color: Colors.grey[700],
-                    //         ),
-                    //         children: const [
-                    //       TextSpan(
-                    //           text: ' *',
-                    //           style: TextStyle(
-                    //             color: Colors.red,
-                    //           ))
-                    //     ])),
                     labelText: "Water drinking goal \*",
                     suffixText: 'ml'),
                 keyboardType: TextInputType.number,
@@ -91,19 +79,6 @@ class InitialSetState extends State<InitialSet> {
                 controller: containerController,
                 enableInteractiveSelection: false,
                 decoration: InputDecoration(
-                    // label: RichText(
-                    //     text: TextSpan(
-                    //         text: 'Water bottle size',
-                    //         style: TextStyle(
-                    //           color: Colors.grey[700],
-                    //         ),
-                    //         children: const [
-                    //       TextSpan(
-                    //           text: ' *',
-                    //           style: TextStyle(
-                    //             color: Colors.red,
-                    //           ))
-                    //     ])),
                     labelText: "Water bottle size \*", suffixText: 'ml'),
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
