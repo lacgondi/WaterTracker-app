@@ -1,6 +1,7 @@
 import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:water_tracker/main.dart';
 import 'tracking.dart';
 
 
@@ -43,23 +44,23 @@ class InitialSetState extends State<InitialSet> {
       storage.setInt('containerSize', _containerSize);
     });
   }
-
+  
   Form _initalSet() {
     final _formKey = GlobalKey<FormState>();
 
     return Form(
       key: _formKey,
-      child: Column(
-
+      child: Container(
+        padding: EdgeInsets.all(18),
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Padding(
-                padding: EdgeInsets.all(18.0),
-                child: TextFormField(
+            
+            TextFormField(
                 controller: goalController,
                 enableInteractiveSelection: false,
-                decoration: InputDecoration(
+              decoration: const InputDecoration(
                     labelText: "Water drinking goal \*",
                     suffixText: 'ml'),
                 keyboardType: TextInputType.number,
@@ -71,14 +72,13 @@ class InitialSetState extends State<InitialSet> {
                       return null;
                 },
               ),
+            SizedBox(
+              height: 30,
             ),
-                    
-            Padding(
-                padding: EdgeInsets.all(18.0),
-                child: TextFormField(
+            TextFormField(
                 controller: containerController,
                 enableInteractiveSelection: false,
-                decoration: InputDecoration(
+              decoration: const InputDecoration(
                     labelText: "Water bottle size \*", suffixText: 'ml'),
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
@@ -89,10 +89,15 @@ class InitialSetState extends State<InitialSet> {
                     return null;
                 },
               ),
+            SizedBox(
+              height: 30,
             ),
-            Padding(
-              padding: EdgeInsets.all(18.0),
-              child: ElevatedButton(
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     saveToLocal(int.parse(goalController.text),
@@ -100,20 +105,21 @@ class InitialSetState extends State<InitialSet> {
                     Navigator.pushReplacementNamed(context, Tracking.id);
                   }
                 },
-                child: const Text('Submit'),
-              ),
+                    child: const Text('Submit'),
+                  ),
+
+                ],
             ),
-          ]),
+            )
+          ],
+        ),
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Water TrackR'),
-        backgroundColor: Colors.teal,
-      ),
       body: _initalSet(),
     );
   }
